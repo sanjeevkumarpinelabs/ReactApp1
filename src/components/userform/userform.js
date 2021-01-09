@@ -21,25 +21,22 @@ export class UserForm extends React.Component{
 
     //normal function this was undefined.
     //once changed to the arrow function , it started to print name.
-    save =  event => {
-        //console.log(event);
-      //  console.log(this.props);
-        console.log(this.state.user.fname);
-        console.log(this);
-
-        // this.setState({
-        //     lname:this.state.fname 
-        // });
+    save =  (event) => {
+        this.setState({
+             users : [...this.state.users,Object.assign({},this.state.user)]
+        })
     }
 
     handleEvent = (event) => {
         //const propertyName = event.target.name;
         this.setState({
             //property name can not have dots hence angled bracket is a must
-            user: {[event.target.name]: event.target.value}
+           // user: {...this.state.user,[event.target.name]: event.target.value}
             //propertyName :event.target.value 
+
+            user: Object.assign(this.state.user,{[event.target.name]: event.target.value})
         });
-        console.log(`name = ${event.target.name} and the value = ${event.target.value}`);
+        console.log(`name = ${event.target.name} and the value = ${event.target.value}`)
     }
     render(){
         return (
@@ -55,7 +52,7 @@ export class UserForm extends React.Component{
                 <label>
                     Last Name:
                     <input value = {this.state.user.lname} name= "lname" onChange = {this.handleEvent} 
-                    placeholder='first name copy' style={{backgroundColor: this.props.color}}/>
+                    placeholder='last name' style={{backgroundColor: this.props.color}}/>
                 </label>
                 <br/>
                 <button onClick ={this.save}>SaveNew </button>
