@@ -41,15 +41,23 @@ export class UserForm extends React.Component{
     }
 
     deleteUser = (index) => {
+
+        const bVal = window.confirm(`Do you want to delete the user ${this.state.users[index].fname} ?`);
         console.log(this);
         console.log(index);
         console.log("Delete button clicke/pressed !!");
+        console.log(bVal);
         //remove 1 element at the index
-        this.state.users.splice(index,1);
-        //now render using setstate
-        this.setState({
-            users: this.state.users
-        });
+
+        if(bVal){
+            this.state.users.splice(index,1);
+            //now render using setstate
+            this.setState({
+                users: this.state.users
+            });
+        }else{
+        console.log("User did not confirm");
+     }
     }
     render(){
         const userModel = this.state.user;
