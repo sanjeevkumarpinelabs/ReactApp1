@@ -39,6 +39,18 @@ export class UserForm extends React.Component{
         });
         console.log(`name = ${event.target.name} and the value = ${event.target.value}`)
     }
+
+    deleteUser = (index) => {
+        console.log(this);
+        console.log(index);
+        console.log("Delete button clicke/pressed !!");
+        //remove 1 element at the index
+        this.state.users.splice(index,1);
+        //now render using setstate
+        this.setState({
+            users: this.state.users
+        });
+    }
     render(){
         const userModel = this.state.user;
         return (
@@ -76,12 +88,13 @@ export class UserForm extends React.Component{
                             </tr>
                         </thead>
                         <tbody>
-                           {this.state.users.map(user => {
-                              // console.log(user);
+                           {this.state.users.map((user,index) => {
+                               console.log(index);
                               return <tr> 
                                         <td> {user.fname} </td>
                                         <td> {user.lname} </td> 
                                         <td> {user.salary} </td> 
+                                        <td> <button onClick={this.deleteUser.bind(this,index)}>Delete</button> </td>
                                     </tr>
 
                                // return <tr>test</tr>;
