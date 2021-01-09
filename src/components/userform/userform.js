@@ -13,9 +13,10 @@ export class UserForm extends React.Component{
         this.state = {
             user :{
             fname:"Sanjeev",
-            lname:'Kumar'
+            lname:'Kumar',
+            salary:5000
             },
-            users: [{fname:"Ramesh" , lname:"Kumar"}, {fname: "Dinesh" , lname: "Sinha"}]
+            users: [{fname:"Ramesh" , lname:"Kumar",salary:10000}, {fname: "Dinesh" , lname: "Sinha",salary:11000}]
         }
     }
 
@@ -55,6 +56,14 @@ export class UserForm extends React.Component{
                     placeholder='last name' style={{backgroundColor: this.props.color}}/>
                 </label>
                 <br/>
+
+                <br/> <br/>
+                <label>
+                    Salary:
+                    <input value = {this.state.user.salary} name= "salary" onChange = {this.handleEvent} 
+                    placeholder='Salary' style={{backgroundColor: this.props.color}}/>
+                </label>
+                <br/>
                 <button onClick ={this.save}>SaveNew </button>
                 <br/> <br/>
                 <table>
@@ -62,12 +71,23 @@ export class UserForm extends React.Component{
                             <tr>
                                 <th>First Name</th>
                                 <th>Last Name</th>
+                                <th>Salary</th>
                             </tr>
                         </thead>
                         <tbody>
                            {this.state.users.map(user => {
                               // console.log(user);
-                              return <tr> <td> {user.fname} </td> <td> {user.lname} </td> </tr>
+                              return <tr> 
+                                        <td> 
+                                            {user.fname}
+                                        </td>
+                                       <td>
+                                            {user.lname} 
+                                        </td> 
+                                        <td>
+                                            {user.salary} 
+                                        </td> 
+                                    </tr>
 
                                // return <tr>test</tr>;
                            })}
