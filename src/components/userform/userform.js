@@ -40,19 +40,20 @@ export class UserForm extends React.Component{
         console.log(`name = ${event.target.name} and the value = ${event.target.value}`)
     }
     render(){
+        const userModel = this.state.user;
         return (
             <div>
                 
                 <label>
                     First Name:    
-                <input value = {this.state.user.fname} name= "fname" onChange = {this.handleEvent}
+                <input value = {userModel.fname} name= "fname" onChange = {this.handleEvent}
                 placeholder={this.props.label} style={{backgroundColor: this.props.color}}/>
             
                 </label>
                 <br/> <br/>
                 <label>
                     Last Name:
-                    <input value = {this.state.user.lname} name= "lname" onChange = {this.handleEvent} 
+                    <input value = {userModel.lname} name= "lname" onChange = {this.handleEvent} 
                     placeholder='last name' style={{backgroundColor: this.props.color}}/>
                 </label>
                 <br/>
@@ -60,7 +61,7 @@ export class UserForm extends React.Component{
                 <br/> <br/>
                 <label>
                     Salary:
-                    <input value = {this.state.user.salary} name= "salary" onChange = {this.handleEvent} 
+                    <input value = {userModel.salary} name= "salary" onChange = {this.handleEvent} 
                     placeholder='Salary' style={{backgroundColor: this.props.color}}/>
                 </label>
                 <br/>
@@ -78,15 +79,9 @@ export class UserForm extends React.Component{
                            {this.state.users.map(user => {
                               // console.log(user);
                               return <tr> 
-                                        <td> 
-                                            {user.fname}
-                                        </td>
-                                       <td>
-                                            {user.lname} 
-                                        </td> 
-                                        <td>
-                                            {user.salary} 
-                                        </td> 
+                                        <td> {user.fname} </td>
+                                        <td> {user.lname} </td> 
+                                        <td> {user.salary} </td> 
                                     </tr>
 
                                // return <tr>test</tr>;
