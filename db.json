@@ -1,16 +1,46 @@
 {
   "users": [
     {
-      "fname": "Sanjeev",
-      "lname": "Kumar",
+      "fname": "Sanjeev1",
+      "lname": "Kumar1",
       "salary": "5000",
       "id": 1
     },
     {
       "fname": "Mahesh",
       "lname": "Garg",
-      "salary": "55000",
+      "salary": "5000",
       "id": 2
+    },
+    {
+      "fname": "Mahesh",
+      "lname": "Garg1",
+      "salary": "5000",
+      "id": 3
+    },
+    {
+      "fname": "Mahesh",
+      "lname": "Garg1",
+      "salary": "5000",
+      "id": 4
+    },
+    {
+      "fname": "Mahesh",
+      "lname": "Garg1",
+      "salary": "5000",
+      "id": 5
+    },
+    {
+      "fname": "Mahesh",
+      "lname": "Garg2",
+      "salary": "5000",
+      "id": 6
+    },
+    {
+      "fname": "Mahesh",
+      "lname": "Garg3",
+      "salary": "5000",
+      "id": 7
     }
   ]
 }

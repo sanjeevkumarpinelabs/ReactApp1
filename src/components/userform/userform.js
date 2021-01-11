@@ -24,10 +24,19 @@ export class UserForm extends React.Component{
     //normal function this was undefined.
     //once changed to the arrow function , it started to print name.
     save =  (event) => {
-        BackendService.saveUser(this.state.user);
-        this.setState({
-             users : [...this.state.users,Object.assign({},this.state.user)]
-        })
+        BackendService.saveUser(this.state.user,(successCallback) =>{
+       // this.state.user.id = successCallback.id;
+            this.setState({
+                users : [...this.state.users,successCallback]
+                
+              //  users : [...this.state.users,Object.assign({},this.state.user)]
+            })
+            }).fail((error) => {
+                window.alert("Somethig went wrong, please retry... !");
+                console.log("Failed to post the user data to backend");
+            })
+            
+        
     }
 
     handleEvent = (event) => {
@@ -42,7 +51,7 @@ export class UserForm extends React.Component{
         console.log(`name = ${event.target.name} and the value = ${event.target.value}`)
     }
 
-    deleteUser = (index) => {
+    deleteUser = (index,userid) => {
 
         const bVal = window.confirm(`Do you want to delete the user ${this.state.users[index].fname} ?`);
         console.log(this);
@@ -50,16 +59,36 @@ export class UserForm extends React.Component{
         console.log("Delete button clicke/pressed !!");
         console.log(bVal);
         //remove 1 element at the index
-
+        
         if(bVal){
-            this.state.users.splice(index,1);
-            //now render using setstate
-            this.setState({
-                users: this.state.users
+            const promise = BackendService.deleteUser(userid);
+            console.log(promise);
+            promise.done((response) => {
+                this.state.users.splice(index,1);
+                //now render using setstate
+                this.setState({
+                    users: this.state.users
+                });
+            })
+            promise.fail((error) => {
+                alert("Deletion failed")
             });
+            
         }else{
         console.log("User did not confirm");
      }
+    }
+    componentDidMount(){
+        const promise = BackendService.getUsers();
+        promise.done((response) => {
+            this.setState({
+                users: response
+            })
+        })
+        promise.fail((error) =>{
+            alert('Faile to load th data during application load');
+            console.log("GET: Failed to fetch the data from back end.")
+        })
     }
     render(){
         const userModel = this.state.user;
@@ -104,7 +133,7 @@ export class UserForm extends React.Component{
                                         <td> {user.fname} </td>
                                         <td> {user.lname} </td> 
                                         <td> {user.salary} </td> 
-                                        <td> <button onClick={this.deleteUser.bind(this,index)}>Delete</button> </td>
+                                        <td> <button onClick={this.deleteUser.bind(this,index,user.id)}>Delete</button> </td>
                                     </tr>
 
                                // return <tr>test</tr>;
