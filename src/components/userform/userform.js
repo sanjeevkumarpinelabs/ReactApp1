@@ -1,5 +1,6 @@
 import React from 'react'
 import './userform.css'
+import {BackendService} from './../../backend-service'
 // export function UserForm(props){
 //     return (
 //         <input placeholder={props.label} style={{backgroundColor: props.color}}/>
@@ -23,6 +24,7 @@ export class UserForm extends React.Component{
     //normal function this was undefined.
     //once changed to the arrow function , it started to print name.
     save =  (event) => {
+        BackendService.saveUser(this.state.user);
         this.setState({
              users : [...this.state.users,Object.assign({},this.state.user)]
         })
