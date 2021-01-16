@@ -16,11 +16,13 @@ export class UserForm extends React.Component{
                 fname:"Sanjeev",
                 lname:'Kumar',
                 salary:5000,
-                gender: "Male"
+                gender: "Male",
+               // skills:[]
             },
             users: [{fname:"Ramesh" , lname:"Kumar",salary:10000}, {fname: "Dinesh" , lname: "Sinha",salary:11000}],
             roles: [],
             sortOrder:true
+            
         }
     }
 
@@ -42,18 +44,60 @@ export class UserForm extends React.Component{
         
     }
 
+    // handleEvent = (event) => {
+    //     //const propertyName = event.target.name;
+    //     if(this.event.target.type == "checkbox") {
+    //         this.state.c
+    //     }
+    //     this.setState({
+    //         //property name can not have dots hence angled bracket is a must
+    //        // user: {...this.state.user,[event.target.name]: event.target.value}
+    //         //propertyName :event.target.value 
+
+    //         user: Object.assign(this.state.user,{[event.target.name]: event.target.value})
+    //     });
+    //     console.log(`name = ${event.target.name} and the value = ${event.target.value}`)
+    // }
+
     handleEvent = (event) => {
-        //const propertyName = event.target.name;
-        this.setState({
-            //property name can not have dots hence angled bracket is a must
-           // user: {...this.state.user,[event.target.name]: event.target.value}
-            //propertyName :event.target.value 
+        if(event.target.type == 'checkbox'){       
+            if(this.state.user.hasOwnProperty(event.target.name) == false){
+                this.setState({  
+                    user: Object.assign(this.state.user, { [event.target.name]: [] })
+                });
+            }
+            if(event.target.checked){
+                //add values here
+                this.state.user[event.target.name].push(event.target.value);
+            }else{
+                //remove basis value       
+                let i = -1;
+                this.state.user[event.target.name].map( (value, index)=> {
+                    if(value == event.target.value){
+                        i = index;
+                    }
+                });
+                if(i>-1){
+                    this.state.user[event.target.name].splice(i, 1);
+                }                
+            }            
+            this.setState({  
+                user: this.state.user
+            });           
 
-            user: Object.assign(this.state.user,{[event.target.name]: event.target.value})
-        });
-        console.log(`name = ${event.target.name} and the value = ${event.target.value}`)
+        } else{
+
+                this.setState({
+                //property name can not have dots hence angled bracket is a must
+            // user: {...this.state.user,[event.target.name]: event.target.value}
+                //propertyName :event.target.value 
+
+                user: Object.assign(this.state.user,{[event.target.name]: event.target.value})
+            });
+
+         console.log(`name = ${event.target.name} and the value = ${event.target.value}`)
+        }
     }
-
     deleteUser = (index,userid) => {
 
         const bVal = window.confirm(`Do you want to delete the user ${this.state.users[index].fname} ?`);
@@ -163,6 +207,14 @@ export class UserForm extends React.Component{
                             {role}
                         </div>
                     })}
+
+                <input name= "skills" onChange= {this.handleEvent} type= 'checkbox' value='JavaScript' />JavaScript
+                <input name= "skills" onChange= {this.handleEvent} type= 'checkbox' value='React' />React
+                <input name= "skills" onChange= {this.handleEvent} type= 'checkbox' value='ReactNative' />ReactNative
+                <input name= "skills" onChange= {this.handleEvent} type= 'checkbox' value='Java' />Java
+                <input name= "skills" onChange= {this.handleEvent} type= 'checkbox' value='C/C++' />C/C++
+
+                <br/>
               
 
                 <button onClick ={this.save}>SaveNew </button>
