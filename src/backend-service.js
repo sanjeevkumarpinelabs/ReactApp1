@@ -1,5 +1,6 @@
 import jquery from "jquery"
 const BASE_URL = "http://localhost:4200/users";
+const ROLES_URL = "http://localhost:4200/roles";
 export class BackendService{
    
     static saveUser(user,successCallback){
@@ -12,5 +13,9 @@ export class BackendService{
 
     static getUsers(){
         return jquery.ajax(BASE_URL, {type:'get'} )
+    }
+
+    static getRoles(){
+        return jquery.ajax(ROLES_URL, {type:'get'} )
     }
 }

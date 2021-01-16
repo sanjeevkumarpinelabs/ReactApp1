@@ -7,17 +7,19 @@ import {BackendService} from './../../backend-service'
 //     )
 // }
 export class UserForm extends React.Component{
-
+    //roles = ["Progammer" , "Lead" , "Manager"];
     constructor(props){
         super(props);
         console.log(this.props);
         this.state = {
             user :{
-            fname:"Sanjeev",
-            lname:'Kumar',
-            salary:5000
+                fname:"Sanjeev",
+                lname:'Kumar',
+                salary:5000,
+                gender: "Male"
             },
-            users: [{fname:"Ramesh" , lname:"Kumar",salary:10000}, {fname: "Dinesh" , lname: "Sinha",salary:11000}]
+            users: [{fname:"Ramesh" , lname:"Kumar",salary:10000}, {fname: "Dinesh" , lname: "Sinha",salary:11000}],
+            roles: []
         }
     }
 
@@ -89,6 +91,18 @@ export class UserForm extends React.Component{
             alert('Faile to load th data during application load');
             console.log("GET: Failed to fetch the data from back end.")
         })
+
+
+        const promiseRoles = BackendService.getRoles();
+        promiseRoles.done((response) => {
+            this.setState({
+                roles: response
+            })
+        })
+        promiseRoles.fail((error) =>{
+            alert('Faile to load the role master');
+            console.log("GET: Failed to fetch role master.")
+        })
     }
     render(){
         const userModel = this.state.user;
@@ -116,6 +130,19 @@ export class UserForm extends React.Component{
                     placeholder='Salary' style={{backgroundColor: this.props.color}}/>
                 </label>
                 <br/>
+            
+                    <input type='radio' value = 'Male' onChange= {this.handleEvent} name= 'gender' checked="True"/>Male
+                    <input type='radio' value = "Female" onChange= {this.handleEvent} name= 'gender' />Female
+
+        
+                    {this.state.roles.map((role) => {
+                       return  <div>
+                            <input type='radio' value = {role} onChange= {this.handleEvent} name ='role'/>
+                            {role}
+                        </div>
+                    })}
+              
+
                 <button onClick ={this.save}>SaveNew </button>
                 <br/> <br/>
                 <table>
