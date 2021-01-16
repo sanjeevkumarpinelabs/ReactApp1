@@ -19,7 +19,8 @@ export class UserForm extends React.Component{
                 gender: "Male"
             },
             users: [{fname:"Ramesh" , lname:"Kumar",salary:10000}, {fname: "Dinesh" , lname: "Sinha",salary:11000}],
-            roles: []
+            roles: [],
+            sortOrder:true
         }
     }
 
@@ -104,6 +105,26 @@ export class UserForm extends React.Component{
             console.log("GET: Failed to fetch role master.")
         })
     }
+
+    sortSalary = (event) => {
+        console.log("sort Salary");
+        let sortOrder = this.state.sortOrder;
+        if(sortOrder){
+           
+            this.state.users.sort((user1,user2)=>{
+            return (user1.salary-user2.salary );
+            });
+         }else{
+            this.state.users.sort((user1,user2)=>{
+                return (user2.salary-user1.salary );
+                });
+         }
+         sortOrder = !sortOrder;
+        this.setState({
+            users:this.state.users,
+            sortOrder: sortOrder
+        })
+    }
     render(){
         const userModel = this.state.user;
         return (
@@ -150,7 +171,8 @@ export class UserForm extends React.Component{
                             <tr>
                                 <th>First Name</th>
                                 <th>Last Name</th>
-                                <th>Salary</th>
+                                <th onClick = {this.sortSalary}> Salary</th>
+                                <th>Programmer</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -160,7 +182,9 @@ export class UserForm extends React.Component{
                                         <td> {user.fname} </td>
                                         <td> {user.lname} </td> 
                                         <td> {user.salary} </td> 
+                                        <td> {user.role} </td>
                                         <td> <button onClick={this.deleteUser.bind(this,index,user.id)}>Delete</button> </td>
+                                        
                                     </tr>
 
                                // return <tr>test</tr>;
