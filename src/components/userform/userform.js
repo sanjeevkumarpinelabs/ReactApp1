@@ -109,6 +109,7 @@ export class UserForm extends React.Component{
     sortSalary = (event) => {
         console.log("sort Salary");
         let sortOrder = this.state.sortOrder;
+        sortOrder = !sortOrder;
         if(sortOrder){
            
             this.state.users.sort((user1,user2)=>{
@@ -119,7 +120,7 @@ export class UserForm extends React.Component{
                 return (user2.salary-user1.salary );
                 });
          }
-         sortOrder = !sortOrder;
+        
         this.setState({
             users:this.state.users,
             sortOrder: sortOrder
