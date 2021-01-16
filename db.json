@@ -6,10 +6,88 @@
       "salary": "5000",
       "gender": "Male",
       "skills[]": [
-        "JavaScript",
+        "ReactNative",
+        "Java",
         "React"
       ],
+      "role": "Lead",
       "id": 1
+    },
+    {
+      "fname": "Sanjeev",
+      "lname": "Kumar",
+      "salary": "5000",
+      "gender": "Male",
+      "skills[]": [
+        "ReactNative",
+        "Java"
+      ],
+      "id": 2
+    },
+    {
+      "fname": "Sanjeev",
+      "lname": "Kumar",
+      "salary": "5000",
+      "gender": "Male",
+      "skills[]": [
+        "ReactNative",
+        "Java"
+      ],
+      "id": 3
+    },
+    {
+      "fname": "Sanjeev",
+      "lname": "Kumar",
+      "salary": "5000",
+      "gender": "Male",
+      "skills[]": [
+        "ReactNative",
+        "Java"
+      ],
+      "id": 4
+    },
+    {
+      "fname": "Sanjeev",
+      "lname": "Kumar",
+      "salary": "5000",
+      "gender": "Male",
+      "id": 5
+    },
+    {
+      "fname": "Sanjeev",
+      "lname": "Kumar",
+      "salary": "5000",
+      "gender": "Male",
+      "id": 6
+    },
+    {
+      "fname": "Sanjeev",
+      "lname": "Kumar",
+      "salary": "5000",
+      "gender": "Male",
+      "id": 7
+    },
+    {
+      "fname": "Sanjeev",
+      "lname": "Kumar",
+      "salary": "5000",
+      "gender": "Male",
+      "skills[]": [
+        "ReactNative",
+        "Java"
+      ],
+      "id": 8
+    },
+    {
+      "fname": "Sanjeev",
+      "lname": "Kumar",
+      "salary": "50002",
+      "gender": "Male",
+      "skills[]": [
+        "ReactNative",
+        "Java"
+      ],
+      "id": 9
     }
   ],
   "roles": [

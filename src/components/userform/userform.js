@@ -17,7 +17,7 @@ export class UserForm extends React.Component{
                 lname:'Kumar',
                 salary:5000,
                 gender: "Male",
-               // skills:[]
+               skills:[]
             },
             users: [{fname:"Ramesh" , lname:"Kumar",salary:10000}, {fname: "Dinesh" , lname: "Sinha",salary:11000}],
             roles: [],
@@ -61,24 +61,24 @@ export class UserForm extends React.Component{
 
     handleEvent = (event) => {
         if(event.target.type == 'checkbox'){       
-            if(this.state.user.hasOwnProperty(event.target.name) == false){
-                this.setState({  
-                    user: Object.assign(this.state.user, { [event.target.name]: [] })
-                });
-            }
+            // if(this.state.user.hasOwnProperty(event.target.name) == false){
+            //     this.setState({  
+            //         user: Object.assign(this.state.user, { [event.target.name]: [] })
+            //     });
+            // }
             if(event.target.checked){
                 //add values here
-                this.state.user[event.target.name].push(event.target.value);
+                this.state.user.skills.push(event.target.value);
             }else{
                 //remove basis value       
                 let i = -1;
-                this.state.user[event.target.name].map( (value, index)=> {
+                this.state.user.skills.map( (value, index)=> {
                     if(value == event.target.value){
                         i = index;
                     }
                 });
                 if(i>-1){
-                    this.state.user[event.target.name].splice(i, 1);
+                    this.state.user.skills.splice(i, 1);
                 }                
             }            
             this.setState({  
@@ -226,16 +226,23 @@ export class UserForm extends React.Component{
                                 <th>Last Name</th>
                                 <th onClick = {this.sortSalary}> Salary</th>
                                 <th>Programmer</th>
+                                <th>Skills</th>
                             </tr>
                         </thead>
                         <tbody>
                            {this.state.users.map((user,index) => {
                                console.log(index);
+                               let skillsList = " ";
+                               if(user["skills[]"]){
+                                skillsList = user["skills[]"].map((skill) => skill +",")
+                               }
                               return <tr> 
+
                                         <td> {user.fname} </td>
                                         <td> {user.lname} </td> 
                                         <td> {user.salary} </td> 
                                         <td> {user.role} </td>
+                                        <td> {skillsList}</td>                                           
                                         <td> <button onClick={this.deleteUser.bind(this,index,user.id)}>Delete</button> </td>
                                         
                                     </tr>
