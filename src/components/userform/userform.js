@@ -170,6 +170,18 @@ export class UserForm extends React.Component{
             sortOrder: sortOrder
         })
     }
+
+    filterName = (event) => {
+        const filterPromise = BackendService.getFilteredUsers(event.target.value);
+        filterPromise.done((response) => {
+            this.setState({
+                users: response
+            })
+        })
+        filterPromise.fail((error) =>{
+            alert('failed to get the filter data');
+        })
+    }
     render(){
         const userModel = this.state.user;
         return (
@@ -222,7 +234,7 @@ export class UserForm extends React.Component{
                 <table>
                         <thead>
                             <tr>
-                                <th>First Name</th>
+                                <th>First Name <div><input onChange= {this.filterName}></input></div></th>
                                 <th>Last Name</th>
                                 <th onClick = {this.sortSalary}> Salary</th>
                                 <th>Programmer</th>

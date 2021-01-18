@@ -18,4 +18,8 @@ export class BackendService{
     static getRoles(){
         return jquery.ajax(ROLES_URL, {type:'get'} )
     }
+
+    static getFilteredUsers(value){
+        return jquery.get(BASE_URL + "?fname=" +value);
+    }
 }
