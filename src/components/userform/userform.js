@@ -1,6 +1,7 @@
 import React from 'react'
 import './userform.css'
 import {BackendService} from './../../backend-service'
+import Counter from './../../components/Counter'
 // export function UserForm(props){
 //     return (
 //         <input placeholder={props.label} style={{backgroundColor: props.color}}/>
@@ -231,6 +232,7 @@ export class UserForm extends React.Component{
 
                 <button onClick ={this.save}>SaveNew </button>
                 <br/> <br/>
+                <Counter> </Counter>
                 <table>
                         <thead>
                             <tr>
