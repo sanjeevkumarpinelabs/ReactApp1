@@ -2,12 +2,14 @@ import React from 'react'
 import './userform.css'
 import {BackendService} from './../../backend-service'
 import Counter from './../../components/Counter'
+import { connect , dispatch } from 'react-redux';
+import updateCountAction from "../../redux-store/action"
 // export function UserForm(props){
 //     return (
 //         <input placeholder={props.label} style={{backgroundColor: props.color}}/>
 //     )
 // }
-export class UserForm extends React.Component{
+ class UserForm extends React.Component{
     //roles = ["Progammer" , "Lead" , "Manager"];
     constructor(props){
         super(props);
@@ -36,7 +38,11 @@ export class UserForm extends React.Component{
                 users : [...this.state.users,successCallback]
                 
               //  users : [...this.state.users,Object.assign({},this.state.user)]
+            
             })
+
+           this.props.udpateCount({type:"UPDATE_COUNT",
+           payload:this.state.users.length});
             }).fail((error) => {
                 window.alert("Somethig went wrong, please retry... !");
                 console.log("Failed to post the user data to backend");
@@ -99,6 +105,14 @@ export class UserForm extends React.Component{
          console.log(`name = ${event.target.name} and the value = ${event.target.value}`)
         }
     }
+
+    userClickData = (user) =>{
+        console.log("User row clicked");
+        console.log(user);
+        console.log(user.fname);
+        this.props.udpateUserData({type:"UPDATE_USER",
+                payload:user});
+    }
     deleteUser = (index,userid) => {
 
         const bVal = window.confirm(`Do you want to delete the user ${this.state.users[index].fname} ?`);
@@ -117,6 +131,10 @@ export class UserForm extends React.Component{
                 this.setState({
                     users: this.state.users
                 });
+            
+                //this.props.updateCount({ type: updateCountAction, payload: this.state.users.length });
+             this.props.udpateCount({type:"UPDATE_COUNT",
+                payload:this.state.users.length});
             })
             promise.fail((error) => {
                 alert("Deletion failed")
@@ -232,7 +250,7 @@ export class UserForm extends React.Component{
 
                 <button onClick ={this.save}>SaveNew </button>
                 <br/> <br/>
-                <Counter> </Counter>
+                <Counter count = {this.state.users.length}> </Counter>
                 <table>
                         <thead>
                             <tr>
@@ -250,9 +268,9 @@ export class UserForm extends React.Component{
                                if(user["skills[]"]){
                                 skillsList = user["skills[]"].map((skill) => skill +",")
                                }
-                              return <tr> 
+                              return <tr onClick={this.userClickData.bind(this,user)}>  
 
-                                        <td> {user.fname} </td>
+                                        <td> {user.fname}</td>
                                         <td> {user.lname} </td> 
                                         <td> {user.salary} </td> 
                                         <td> {user.role} </td>
@@ -270,3 +288,13 @@ export class UserForm extends React.Component{
             )
     }
 }
+
+const MapDispatchToProps = function(dispatch){
+    return (
+        {
+            udpateCount: (action) => dispatch(action),
+            udpateUserData: (action) => dispatch(action)
+    });
+}
+
+export default connect(null,MapDispatchToProps)(UserForm);

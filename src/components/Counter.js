@@ -2,7 +2,7 @@ import { connect } from "react-redux"
 
 function Counter(props){
     return (
-        <span id= 'mycount'> Count: {props.counter.count}</span>
+        <span id= 'mycount'> Count: {props.data.count}</span>
     )
 
 }

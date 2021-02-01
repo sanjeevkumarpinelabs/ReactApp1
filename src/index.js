@@ -8,8 +8,9 @@ import reducer from './redux-store/reducers'
 import thunk from 'redux-thunk';
 //import reportWebVitals from './reportWebVitals';
 const initialState = {count:5}
-const allReducers = combineReducers({counter:reducer})
-const mystore = createStore(allReducers,initialState,compose(applyMiddleware(thunk)));
+const allReducers = combineReducers({data:reducer})
+const mystore = createStore(allReducers,initialState,compose(applyMiddleware(thunk),
+window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
 
 ReactDOM.render(
   <React.StrictMode>

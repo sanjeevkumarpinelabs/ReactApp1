@@ -1,5 +1,5 @@
 import jquery from "jquery"
-const BASE_URL = "http://localhost:4200/users";
+const BASE_URL = "http://localhost:4200/users/";
 const ROLES_URL = "http://localhost:4200/roles";
 export class BackendService{
    
